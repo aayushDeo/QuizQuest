@@ -1,32 +1,34 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
-
+// add timer
 const lobbySchema = new Schema({
-  numOfUsers: {
+  id: {
     type: Number,
     required: true,
-    min: 1,
-    max: 2
+  },
+  description: {
+    type: String,
   },
   numOfQuestions: {
     type: Number,
     required: true,
-    min: 1
   },
   subject: {
     type: String,
     required: true,
-    enum: ['Math', 'Science', 'History', 'Geography', 'Literature', 'Art', 'Music', 'Sports'] 
   },
   difficulty: {
     type: String,
     required: true,
-    enum: ['Easy', 'Medium', 'Hard']
   },
   createdAt: {
     type: Date,
     default: Date.now
-  }
+  },
+  // time: {
+  //   type: Date
+  //   required: true
+  // }
 });
 const Lobby = mongoose.model('Lobby', lobbySchema);
 module.exports = Lobby;
