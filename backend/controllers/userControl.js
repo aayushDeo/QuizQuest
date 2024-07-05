@@ -24,6 +24,7 @@ const registerUser = asyncHandler(async (req, res)=>{
 
 const loginUser = asyncHandler(async (req, res)=>{
     const { email, password} = req.body;
+    console.log(email);
     if(!email || !password){
         res.status(400);
         throw new Error("All fields are mandatory");
@@ -42,7 +43,11 @@ const loginUser = asyncHandler(async (req, res)=>{
             },process.env.ACCESS_TOKEN_SECRET,
             { expiresIn:"1d" }
         );
-        res.status(200).json({accesstoken});
+        // res.status(200).json({accesstoken, user._id});
+        res.json({
+            _id: user._id,
+            token: accesstoken
+          });
     }else {
         res.status(401);
         throw new Error("email or password is not valid");
